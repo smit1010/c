@@ -1,7 +1,7 @@
 /*************************************************************************
 	> File Name: hello.c
-	> Author: haibin
-	> Mail: haibin2011@163.com 
+	> Author: xOpenLee
+	> Mail: 750haige@gmail.com 
 	> Created Time: Sunday, January 25, 2015 PM03:27:03 HKT
  ************************************************************************/
 

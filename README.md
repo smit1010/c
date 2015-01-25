@@ -1,2 +1,2 @@
-# theCprogrammingLanguage
-The c programming language Daily
+# C
+The c language Daily

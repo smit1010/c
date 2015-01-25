@@ -1,0 +1,29 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CBB_DEBUG	cbb/debug.h	17;"	d
+CBB_ERR	cbb/debug.h	50;"	d
+CBB_PDEBUG	cbb/debug.h	25;"	d
+CBB_PRINTF	cbb/debug.h	13;"	d
+CBB_VAR_DEBUG	cbb/debug.h	37;"	d
+DEBUG	cbb/debug.h	19;"	d
+DEBUG	cbb/debug.h	21;"	d
+PDEBUG	cbb/debug.h	27;"	d
+PDEBUG	cbb/debug.h	33;"	d
+VAR_DEBUG	cbb/debug.h	39;"	d
+VAR_DEBUG	cbb/debug.h	46;"	d
+_DEBUG_H	cbb/debug.h	9;"	d
+_INCLUDES_H	cbb/includes.h	9;"	d
+_TYPE_H	cbb/type.h	9;"	d
+i16	cbb/type.h	/^typedef short   i16;$/;"	t
+i32	cbb/type.h	/^typedef int     i32;$/;"	t
+i64	cbb/type.h	/^typedef double  i64;$/;"	t
+i8	cbb/type.h	/^typedef char    i8;$/;"	t
+main	chapter1/hello.c	/^i32 main()$/;"	f
+u16	cbb/type.h	/^typedef unsigned short  u16;$/;"	t
+u32	cbb/type.h	/^typedef unsigned int    u32;$/;"	t
+u64	cbb/type.h	/^typedef unsigned double u64;$/;"	t
+u8	cbb/type.h	/^typedef unsigned char   u8;$/;"	t

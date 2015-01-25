@@ -5,10 +5,12 @@
 	> Created Time: Sunday, January 25, 2015 PM03:27:03 HKT
  ************************************************************************/
 
-#include<stdio.h>
+#include "../cbb/includes.h"
 
-int main()
+i32 main()
 {
-    printf("\r\n###INFO:Hello the C programming language\r\n");
+    i32 var_test = 0xABCD;
+    PDEBUG();
+    VAR_DEBUG(var_test);
     return 0;
 }

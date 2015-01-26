@@ -1,7 +1,7 @@
 /*************************************************************************
 	> File Name: hello.c
 	> Author: xOpenLee
-	> Mail: 750haige@gmail.com 
+	> Mail: 750haige@gmail.com
 	> Created Time: Sunday, January 25, 2015 PM03:27:03 HKT
  ************************************************************************/
 
@@ -9,10 +9,13 @@
 
 #define LOWER 0
 #define UPPER 300
-#define STEP 20 
+#define STEP 20
+
+#define OUT 1
+#define IN 0
 
 static void printHelloWorld()
-{ 
+{
     PDEBUG();
     printf("hello, world\r\n");
 }
@@ -20,7 +23,7 @@ static void printHelloWorld()
 static void printFahrenheitCelsius(const i32 lower, const i32 upper, const u32 step)
 {
     i32 fahr = 0, c = 0;
- 
+
     /*文中用while循环来控制，对比for来看，将循环条件的比较和改变分离不同的行，不利于阅读和理解*/
     for (fahr = lower; fahr <= upper; fahr += step)
     {
@@ -35,7 +38,7 @@ static void printFahrenheitCelsius(const i32 lower, const i32 upper, const u32 s
 static void printFahrenheitCelsiusFloat(const float lower, const float upper, const u32 step)
 {
     float fahr = 0, c = 0;
- 
+
     for (fahr = lower; fahr <= upper; fahr += step)
     {
         /*it can use 5.0/9.0*/
@@ -44,12 +47,69 @@ static void printFahrenheitCelsiusFloat(const float lower, const float upper, co
         printf("###INFO: Fahrenheit = %3.0f,\tCelsius = %6.1f\r\n", fahr, c);
     }
 }
+static u8 fileCopy()
+{
+    i32 input = 0;
+    /*-1*/
+    printf("EOF = %d\r\n", EOF);
+    /*if you want to break, tap CTRL + d*/
+    for( ; (input = getchar()) != EOF; putchar(input));
+}
 
+static void wordCount()
+{
+    int c, nl, nw, nc, state;
+
+    state = OUT;
+    c = nl = nw = nc = 0;
+
+    while((c = getchar()) != EOF)
+    {
+        ++nc;
+        if ('\n' == c)
+            ++nl;
+        if (' ' == c || '\n' == c || '\t' == c)
+            state = OUT;
+        else if (OUT == state)
+        {
+            state = IN;
+            ++nw;
+        }
+    }
+    printf("###INFO: line = %d, word = %d, character = %d \r\n", nl, nw, nc);
+}
+
+static void array()
+{
+    i32 c = 0, i = 0, nwhite = 0, nother = 0;
+#define DIGIAL_NUM 10
+    i32 ndigit[DIGIAL_NUM];
+    /*memset have a return pointer, return the firset n of ndigit*/
+    memset(ndigit, 0x00, DIGIAL_NUM*sizeof(i32));
+
+    while ((c = getchar()) != EOF)
+    {
+        if ('0' <= c && '9' >= c)
+            /*smart*/
+            ++ndigit[c - '0'];
+        else if (' ' == c || '\n' == c || '\t' == c)
+            ++nwhite;
+        else
+            ++nother;
+    }
+
+    for (i = 0; i < DIGIAL_NUM; i++)
+        printf("digital %d has %d \r\n", i, ndigit[i]);
+    printf("###INFO: white space = %d, other = %d\r\n", nwhite, nother);
+}
 i32 main()
 {
     PDEBUG();
     printHelloWorld();
     printFahrenheitCelsius(LOWER, UPPER, STEP);
     printFahrenheitCelsiusFloat(LOWER, UPPER, STEP);
+    //fileCopy();
+    //wordCount();
+    array();
     return 0;
 }

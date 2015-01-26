@@ -9,6 +9,7 @@
 #define _INCLUDES_H
 
 #include <stdio.h>
+#include <string.h>
 #include "debug.h"
 #include "type.h"
 

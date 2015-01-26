@@ -26,4 +26,9 @@
 ##1.3 for loop
     文中用while循环来控制，对比for来看，将循环条件的比较和改变分离不同的行，不利于阅读和理解
 ##1.4 magic numbers
-    magic numbers convey litle info, hard to change in a systematic
+    magic numbers convey little info, hard to change in a systematic.可读性差,扩展性差
+##1.5 input and out
+    EOF 是end of file 如果在linux當中,如想输入文件的尾部,则输入ctrl + d.getchar()返回值定义成int的原因是因为有足够
+    的位宽来处理eof.eof的值在stdio.h定义,这个值不是恒定的,只要文件当中没有使用则可以.
+##1.6 arrays
+    在linux系统下,如果遇到不懂的则可以使用man memset等进行查看.

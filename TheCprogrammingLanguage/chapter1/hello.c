@@ -13,14 +13,15 @@
 
 #define OUT 1
 #define IN 0
+#define MAX_LINE 1000
 
-static void printHelloWorld()
+static void print_hello_world()
 {
     PDEBUG();
     printf("hello, world\r\n");
 }
 
-static void printFahrenheitCelsius(const i32 lower, const i32 upper, const u32 step)
+static void print_fahrenheit_celsius(const i32 lower, const i32 upper, const u32 step)
 {
     i32 fahr = 0, c = 0;
 
@@ -35,7 +36,7 @@ static void printFahrenheitCelsius(const i32 lower, const i32 upper, const u32 s
 }
 
 
-static void printFahrenheitCelsiusFloat(const float lower, const float upper, const u32 step)
+static void print_fahrenheit_celsius_float(const float lower, const float upper, const u32 step)
 {
     float fahr = 0, c = 0;
 
@@ -47,7 +48,7 @@ static void printFahrenheitCelsiusFloat(const float lower, const float upper, co
         printf("###INFO: Fahrenheit = %3.0f,\tCelsius = %6.1f\r\n", fahr, c);
     }
 }
-static u8 fileCopy()
+static u8 file_copy()
 {
     i32 input = 0;
     /*-1*/
@@ -56,7 +57,7 @@ static u8 fileCopy()
     for( ; (input = getchar()) != EOF; putchar(input));
 }
 
-static void wordCount()
+static void word_count()
 {
     int c, nl, nw, nc, state;
 
@@ -102,14 +103,71 @@ static void array()
         printf("digital %d has %d \r\n", i, ndigit[i]);
     printf("###INFO: white space = %d, other = %d\r\n", nwhite, nother);
 }
-i32 main()
+
+static i32 power(const i32 base, u32 n)
 {
     PDEBUG();
-    printHelloWorld();
-    printFahrenheitCelsius(LOWER, UPPER, STEP);
-    printFahrenheitCelsiusFloat(LOWER, UPPER, STEP);
-    //fileCopy();
-    //wordCount();
+    if(0 == n)
+        return 1;
+
+    return power(base, --n)*base;
+}
+
+static int getline(char *s, const i32 lim)
+{
+    i32 c = 0, i = 0;
+    if (NULL == s)
+        return 0;
+
+    /*for safe: i < lim -1*/
+    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i)
+       s[i] = c;
+    if (c == '\n') {
+       s[i] = c;
+        ++i;
+    }
+
+    s[i] = '\0';/*the null character, whose value is zero*/
+    printf("###INFO: %s\r\n", s);
+    return i;
+}
+
+static void copy(char *to, const char *from)
+{
+    if ((NULL == to) || (NULL == from))
+        return;
+
+    while((*to++ = *from++) != '\0');
+}
+
+i32 main()
+{
+    i32 ret = 0;
+    i32 len = 0, max = 0;
+
+    char line[MAX_LINE] = {0,};
+    char longest[MAX_LINE] = {0,};
+
+    PDEBUG();
+#ifdef SHOW_PASS
+    print_hello_world();
+    print_fahrenheit_celsius(LOWER, UPPER, STEP);
+    print_fahrenheit_celsius_float(LOWER, UPPER, STEP);
+    file_copy();
+    word_count();
     array();
+    VAR_DEBUG(ret);
+    ret = power(2, 5);
+#endif
+
+    while ((len = getline(line, MAX_LINE)) > 0) {
+        if (len > max) { 
+            printf("###INFO: the line %s\r\n", line);
+            max = len;
+            copy(longest, line);
+            printf("###INFO: the longest %s\r\n", longest);
+        }
+    }
+
     return 0;
 }

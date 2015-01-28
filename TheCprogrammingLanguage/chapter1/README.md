@@ -35,15 +35,16 @@
 ##1.7 functions
     function设计的目的就是封装过程,调用者只需要知道实现了什么功能,而不需知道实现的过程. 
     通常函数的返回值用0标准正常结束,用NoneZero表示异常退出..ANSI C 之前的函数定义形式.
-'''c
-power_old_style(base,n)
-int base, n;
-{
-    PDEBUG();
-}
-'''
+    '''c
+    power_old_style(base,n)
+    int base, n;
+    {
+        PDEBUG();
+    }
+    '''
 ##1.8 arguments
-    in c ,all function arguments are passed "by value".因此我们调用函数传递的参数是一个临时变量.C语言和Fortran和pascal不同,他们是传递original argument.
+    in c ,all function arguments are passed "by value".因此我们调用函数传递的参数是一个临时变量
+    C语言和Fortran和pascal不同,他们是传递original argument.
     c语言的变量不能被调用函数内部进行改变,调用函数内容只是改变私有的和临时的副本.
     若需要改变变量的值,需要将变量的地址传入调用函数中,调用的函数必须将参数声明成指针
 ##1.9 character

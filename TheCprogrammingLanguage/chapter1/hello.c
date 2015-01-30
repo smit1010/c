@@ -160,12 +160,12 @@ i32 main()
     ret = power(2, 5);
 #endif
 
-    while ((len = getline(line, MAX_LINE)) > 0) {
+    while ((len = getline(line, max_line)) > 0) {
         if (len > max) { 
-            printf("###INFO: the line %s\r\n", line);
+            printf("###info: the line %s\r\n", line);
             max = len;
             copy(longest, line);
-            printf("###INFO: the longest %s\r\n", longest);
+            printf("###info: the longest %s\r\n", longest);
         }
     }
 

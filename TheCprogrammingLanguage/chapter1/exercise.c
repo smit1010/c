@@ -250,6 +250,218 @@ static i32 excerise_1_13()
 }
 
 
+#define MAX_CHARACTERS_LEN 128
+
+static i32 excerise_1_14()
+{
+    u8 row = 0 , column = 0;
+    i32 c = 0 ;
+    u8 word_len = 0;
+    u32 max_count = 0;
+
+    struct Histogram histogram[MAX_CHARACTERS_LEN];
+
+    memset(histogram, 0x00, MAX_CHARACTERS_LEN * sizeof(struct Histogram));
+
+    for(row = 0; row < MAX_CHARACTERS_LEN; row++)
+        histogram[row].word_len = row;
+
+    /*get input data*/
+    while((c = getchar()) != EOF)
+    {
+        histogram[c].count += 1;
+        /*save max word , use for draw ordinate */
+        max_count = histogram[c].count  > max_count ? histogram[c].count: max_count;
+    }
+
+    histogram[0].count = 0;
+
+
+    /*draw Histogram*/
+    printf("character_count\r\n");
+    for(row = 0; row < max_count; row++)
+    {
+        printf("%d |", max_count - row);
+        for(column = 1 ; column < MAX_CHARACTERS_LEN; column++)
+        {
+            if(histogram[column].count >= max_count-row)
+                printf("  *");
+            else
+                printf("   ");
+        }
+        printf("\r\n");
+    }
+    /*draw  horizontal axis*/
+    printf("   ");
+    for(column = 1; column < MAX_CHARACTERS_LEN; column++)
+        printf("___");
+
+    printf("  character_len\r\n");
+
+    for(column = 0; column < MAX_CHARACTERS_LEN; column++)
+        printf("  %d", column);
+
+    return 0;
+}
+
+static i32 excerise_1_15(const i32 nlower, const i32 nupper, const i32 nstep)
+{
+    float fahr = 0, celsius = 0;
+    i32 lower = nlower, upper = nupper, step = nstep;
+
+    fahr = upper;
+    printf("\r\nTable Fahr  Celsius\r\n");
+    while(fahr >= 0)
+    {
+        celsius =(5.0/9.0)*(fahr - 32);
+        printf("%3.0f, %6.0f\r\n" , fahr, celsius);
+        fahr = fahr - step;
+    }
+
+    return 0;
+}
+
+static int excerise_1_16_getline(char *s, const i32 lim)
+{
+    i32 c = 0, i = 0;
+    if (NULL == s)
+        return 0;
+
+    /*for safe: i < lim -1*/
+    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i)
+        s[i] = c;
+    if (c == '\n')
+    {
+        s[i] = c;
+        ++i;
+    }
+
+    s[i] = '\0';/*the null character, whose value is zero*/
+    return i;
+}
+
+static i32 excerise_1_16()
+{
+    i32 ret = 0;
+    i32 len = 0, max = 0;
+
+#define MAX_LINE 1000
+    char line[MAX_LINE] = {0,};
+    char longest[MAX_LINE] = {0,};
+
+    while ((len = excerise_1_16_getline(line, MAX_LINE)) > 0)
+    {
+        printf("%s\r\n", line);
+    }
+
+    return 0;
+}
+
+static i32 excerise_1_17()
+{
+    i32 ret = 0;
+    i32 len = 0, max = 0;
+
+#define MAX_LINE 1000
+    char line[MAX_LINE] = {0,};
+    char longest[MAX_LINE] = {0,};
+
+    while ((len = excerise_1_16_getline(line, MAX_LINE)) > 0)
+    {
+        if(len > 80)
+            printf("%s\r\n", line);
+        len = 0;
+    }
+
+    return 0;
+}
+
+static int excerise_1_18_getline(char *s, const i32 lim)
+{
+    i32 c = 0, i = 0;
+    if (NULL == s)
+        return 0;
+
+    /*for safe: i < lim -1*/
+    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i)
+    {
+        if(c == ' ' || c == '\t')
+        {
+            i--;
+            continue;
+        }
+        s[i] = c;
+    }
+    if (c == '\n')
+    {
+        s[i] = c;
+        ++i;
+    }
+
+    s[i] = '\0';/*the null character, whose value is zero*/
+    return i;
+}
+
+
+static i32 excerise_1_18()
+{
+    i32 ret = 0;
+    i32 len = 0, max = 0;
+
+#define MAX_LINE 1000
+    char line[MAX_LINE] = {0,};
+    char longest[MAX_LINE] = {0,};
+
+    while ((len = excerise_1_18_getline(line, MAX_LINE)) > 0)
+    {
+        if(len != 0)
+            printf("%s\r\n", line);
+        len = 0;
+    }
+
+    return 0;
+}
+
+
+static int excerise_1_19_getline(char *s, const i32 lim)
+{
+    i32 c = 0, i = 0;
+    if (NULL == s)
+        return 0;
+
+    /*for safe: i < lim -1*/
+    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i)
+        s[i] = c;
+    if (c == '\n')
+    {
+        s[i] = c;
+        ++i;
+    }
+
+    s[i] = '\0';/*the null character, whose value is zero*/
+    return i;
+}
+
+static i32 excerise_1_19()
+{
+    i32 ret = 0;
+    i32 len = 0, index = 0;
+
+#define MAX_LINE 1000
+    char line[MAX_LINE] = {0,};
+    char longest[MAX_LINE] = {0,};
+
+    while ((len = excerise_1_18_getline(line, MAX_LINE)) > 0)
+    {
+        /*just print reverse*/
+        while(len--)
+            putchar(line[len]);
+        printf("\r\n");
+    }
+
+    return 0;
+}
+
 i32 main()
 {
     PDEBUG();
@@ -267,9 +479,16 @@ i32 main()
     excerise_1_10();
     excerise_1_11();
     excerise_1_12();
+    excerise_1_13();
+    excerise_1_14();
+    excerise_1_15(0, 300, 20);
+    excerise_1_16();
+    excerise_1_17();
+    excerise_1_18();
+
 #endif
 
-    excerise_1_13();
+    excerise_1_19();
     return 0;
 }
 

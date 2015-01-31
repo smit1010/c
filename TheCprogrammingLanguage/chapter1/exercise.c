@@ -1,8 +1,8 @@
 /*************************************************************************
-	> File Name: exercise.c
-	> Author: xOpenLee
-	> Mail: 750haige@gmail.com
-	> Created Time: Thursday, January 29, 2015 PM07:30:57 HKT
+    > File Name: exercise.c
+    > Author: xOpenLee
+    > Mail: 750haige@gmail.com
+    > Created Time: Thursday, January 29, 2015 PM07:30:57 HKT
  ************************************************************************/
 
 #include<stdio.h>
@@ -17,7 +17,6 @@ static i32 excerise_1_1()
     return 0;
 
 }
-
 static i32 excerise_1_2()
 {
     /* \c unknow escape sequence*/
@@ -422,7 +421,6 @@ static i32 excerise_1_18()
     return 0;
 }
 
-
 static int excerise_1_19_getline(char *s, const i32 lim)
 {
     i32 c = 0, i = 0;
@@ -462,6 +460,159 @@ static i32 excerise_1_19()
     return 0;
 }
 
+static int excerise_1_20_getline(char *s, const i32 lim, const char detab, const char replace, u32 num)
+{
+    i32 c = 0, i = 0;
+    if (NULL == s)
+        return 0;
+
+    /*for safe: i < lim -1*/
+    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i)
+    {
+        if(c == detab)
+        {
+            while(num--)
+                s[i++] = replace;
+            continue;
+        }
+
+        printf("c = %c, i = %d \r\n", c, i);
+        s[i] = c;
+    }
+    if (c == '\n')
+    {
+        s[i] = c;
+        ++i;
+    }
+
+    s[i] = '\0';/*the null character, whose value is zero*/
+    printf("%s\r\n", s);
+    return i;
+}
+
+static i32 excerise_1_20()
+{
+    i32 ret = 0;
+    i32 len = 0, index = 0;
+
+#define MAX_LINE 1000
+#define DETAB '\t'
+#define REPLACE ' '
+#define NUM_OF_BLANK 4
+    char line[MAX_LINE] = {0,};
+    char longest[MAX_LINE] = {0,};
+
+    while ((len = excerise_1_20_getline(line, MAX_LINE, DETAB, REPLACE, NUM_OF_BLANK)) > 0)
+        while(index < len)
+            putchar(line[index++]);
+
+    return 0;
+}
+
+
+static int excerise_1_21_getline(char *s, const i32 lim, const char entab, const char replace, u32 num)
+{
+    i32 c = 0, i = 0;
+    i32 pre_buffer = 0, blank_count = 0;
+
+    if (NULL == s)
+        return 0;
+
+    /*for safe: i < lim -1*/
+    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i)
+    {
+        if (c ==  replace)
+            blank_count += 1;/*blank count*/
+        else
+            blank_count = 0;/*reset the blank count*/
+
+        if(blank_count == 4)
+        {
+            DEBUG("blank_count = %d\r\n", blank_count);
+            i -= 3;
+            s[i] = entab;
+        }
+
+        s[i] = c;
+    }
+
+    if (c == '\n')
+    {
+        s[i] = c;
+        ++i;
+    }
+
+    s[i] = '\0';/*the null character, whose value is zero*/
+    printf("%s\r\n", s);
+    DEBUG("i = %d\r\n", i);
+    return i;
+}
+
+static i32 excerise_1_21()
+{
+    i32 ret = 0;
+    i32 len = 0, index = 0;
+
+#define MAX_LINE 1000
+#define DETAB '\t'
+#define REPLACE ' '
+#define NUM_OF_BLANK 4
+    char line[MAX_LINE] = {0,};
+    char longest[MAX_LINE] = {0,};
+
+    while ((len = excerise_1_21_getline(line, MAX_LINE, DETAB, REPLACE, NUM_OF_BLANK)) > 0)
+        while(index < len)
+            putchar(line[index++]);
+
+    return 0;
+}
+
+
+static int excerise_1_22_getline(char *s, const i32 lim,  u32 fold)
+{
+    i32 c = 0, i = 0;
+    i32 pre_buffer = 0, blank_count = 0;
+
+    if (NULL == s)
+        return 0;
+
+    /*for safe: i < lim -1*/
+    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i)
+    {
+        s[i] = c;
+    }
+
+    if (c == '\n')
+    {
+        s[i] = c;
+        ++i;
+    }
+
+    s[i] = '\0';/*the null character, whose value is zero*/
+    printf("%s\r\n", s);
+    DEBUG("i = %d\r\n", i);
+    return i;
+}
+
+static i32 excerise_1_22()
+{
+    i32 ret = 0;
+    i32 len = 0, index = 0;
+
+#define MAX_LINE 1000
+#define DETAB '\t'
+#define REPLACE ' '
+#define NUM_OF_BLANK 4
+    char line[MAX_LINE] = {0,};
+    char longest[MAX_LINE] = {0,};
+
+    while ((len = excerise_1_21_getline(line, MAX_LINE, DETAB, REPLACE, NUM_OF_BLANK)) > 0)
+        while(index < len)
+            putchar(line[index++]);
+
+    return 0;
+}
+
 i32 main()
 {
     PDEBUG();
@@ -485,10 +636,11 @@ i32 main()
     excerise_1_16();
     excerise_1_17();
     excerise_1_18();
-
+    excerise_1_19();
+    excerise_1_20();
 #endif
 
-    excerise_1_19();
+    excerise_1_21();
     return 0;
 }
 

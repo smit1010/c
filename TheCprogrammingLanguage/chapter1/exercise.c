@@ -31,8 +31,7 @@ static i32 excerise_1_3()
 
     fahr = lower;
     printf("\r\nTable Fahr  Celsius\r\n");
-    while(fahr <= upper)
-    {
+    while(fahr <= upper) {
         celsius =(5.0/9.0)*(fahr - 32);
         printf("%3.0f, %6.0f\r\n" , fahr, celsius);
         fahr = fahr + step;
@@ -48,8 +47,7 @@ static i32 excerise_1_4()
 
     celsius = lower;
     printf("\r\nTable Fahr  Celsius\r\n");
-    while(celsius <= upper)
-    {
+    while(celsius <= upper) {
         fahr = (9.0/5.0)*celsius+32;
         printf("%3.0f, %6.0f\r\n" , fahr, celsius);
         celsius = celsius + step;
@@ -65,8 +63,7 @@ static i32 excerise_1_5()
 
     fahr = upper;
     printf("\r\nTable Fahr  Celsius\r\n");
-    while(fahr >= 0)
-    {
+    while(fahr >= 0) {
         celsius =(5.0/9.0)*(fahr - 32);
         printf("%3.0f, %6.0f\r\n" , fahr, celsius);
         fahr = fahr - step;
@@ -92,8 +89,7 @@ static i32 excerise_1_8()
 {
     i32 blank = 0, tab = 0, newline = 0;
     i32 c = 0;
-    while((c = getchar()) != EOF)
-    {
+    while((c = getchar()) != EOF) {
         if (' ' == c)
             blank++;
         else if ('\t' == c)
@@ -108,8 +104,7 @@ static i32 excerise_1_8()
 static i32 excerise_1_9()
 {
     i32 c = 0, buffer = 0;
-    while((c = getchar()) != EOF)
-    {
+    while((c = getchar()) != EOF) {
         if (' '== c && ' '==buffer)
             continue;
 
@@ -124,8 +119,7 @@ static i32 excerise_1_10()
 {
     i32 blank = 0, tab = 0, newline = 0;
     i32 c = 0;
-    while((c = getchar()) != EOF)
-    {
+    while((c = getchar()) != EOF) {
         if ('\t' == c)
             printf("\t");
         else if ('\b' == c)
@@ -144,16 +138,14 @@ static i32 excerise_1_11()
     state = OUT;
     c = nl = nw = nc = 0;
 
-    while((c = getchar()) != EOF)
-    {
+    while((c = getchar()) != EOF) {
         ++nc;
         if ('\n' == c)
             ++nl;
         /* uncover possible punctuation */
         if (' ' == c || '\n' == c || '\t' == c || ',' == c || '.' == c || ':' == c ) /*and so on */
             state = OUT;
-        else if (OUT == state)
-        {
+        else if (OUT == state) {
             state = IN;
             ++nw;
         }
@@ -168,8 +160,7 @@ static i32 excerise_1_12()
     state = OUT;
     c = nl = nw = nc = 0;
 
-    while((c = getchar()) != EOF)
-    {
+    while((c = getchar()) != EOF) {
         /* uncover possible punctuation and so on */
         if (' ' == c || '\n' == c || '\t' == c || ',' == c || '.' == c || ':' == c )
             printf("\r\n");
@@ -179,8 +170,7 @@ static i32 excerise_1_12()
     return 0;
 }
 
-struct Histogram
-{
+struct Histogram {
     u32 count;
     u8 word_len;
 };
@@ -202,13 +192,11 @@ static i32 excerise_1_13()
         histogram[row].word_len = row;
 
     /*get input data*/
-    while((c = getchar()) != EOF)
-    {
+    while((c = getchar()) != EOF) {
         if (word_len >= MAX_WORLD_LEN)
             word_len = 0;/*reset */
 
-        if ((' ' == c || '\n' == c || '\t' == c || ',' == c || '.' == c || ':' == c ))
-        {
+        if ((' ' == c || '\n' == c || '\t' == c || ',' == c || '.' == c || ':' == c )) {
             histogram[word_len].count += 1;
             /*save max word , use for draw ordinate */
             max_count = histogram[word_len].count  > max_count ? histogram[word_len].count: max_count;
@@ -223,11 +211,9 @@ static i32 excerise_1_13()
 
     /*draw Histogram*/
     printf("word_count\r\n");
-    for(row = 0; row < max_count; row++)
-    {
+    for(row = 0; row < max_count; row++) {
         printf("%d |", max_count - row);
-        for(column = 1 ; column < MAX_WORLD_LEN; column++)
-        {
+        for(column = 1 ; column < MAX_WORLD_LEN; column++) {
             if(histogram[column].count >= max_count-row)
                 printf("  *");
             else
@@ -266,8 +252,7 @@ static i32 excerise_1_14()
         histogram[row].word_len = row;
 
     /*get input data*/
-    while((c = getchar()) != EOF)
-    {
+    while((c = getchar()) != EOF) {
         histogram[c].count += 1;
         /*save max word , use for draw ordinate */
         max_count = histogram[c].count  > max_count ? histogram[c].count: max_count;
@@ -278,11 +263,9 @@ static i32 excerise_1_14()
 
     /*draw Histogram*/
     printf("character_count\r\n");
-    for(row = 0; row < max_count; row++)
-    {
+    for(row = 0; row < max_count; row++) {
         printf("%d |", max_count - row);
-        for(column = 1 ; column < MAX_CHARACTERS_LEN; column++)
-        {
+        for(column = 1 ; column < MAX_CHARACTERS_LEN; column++) {
             if(histogram[column].count >= max_count-row)
                 printf("  *");
             else
@@ -310,8 +293,7 @@ static i32 excerise_1_15(const i32 nlower, const i32 nupper, const i32 nstep)
 
     fahr = upper;
     printf("\r\nTable Fahr  Celsius\r\n");
-    while(fahr >= 0)
-    {
+    while(fahr >= 0) {
         celsius =(5.0/9.0)*(fahr - 32);
         printf("%3.0f, %6.0f\r\n" , fahr, celsius);
         fahr = fahr - step;
@@ -329,8 +311,7 @@ static int excerise_1_16_getline(char *s, const i32 lim)
     /*for safe: i < lim -1*/
     for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i)
         s[i] = c;
-    if (c == '\n')
-    {
+    if (c == '\n') {
         s[i] = c;
         ++i;
     }
@@ -348,8 +329,7 @@ static i32 excerise_1_16()
     char line[MAX_LINE] = {0,};
     char longest[MAX_LINE] = {0,};
 
-    while ((len = excerise_1_16_getline(line, MAX_LINE)) > 0)
-    {
+    while ((len = excerise_1_16_getline(line, MAX_LINE)) > 0) {
         printf("%s\r\n", line);
     }
 
@@ -365,8 +345,7 @@ static i32 excerise_1_17()
     char line[MAX_LINE] = {0,};
     char longest[MAX_LINE] = {0,};
 
-    while ((len = excerise_1_16_getline(line, MAX_LINE)) > 0)
-    {
+    while ((len = excerise_1_16_getline(line, MAX_LINE)) > 0) {
         if(len > 80)
             printf("%s\r\n", line);
         len = 0;
@@ -382,17 +361,14 @@ static int excerise_1_18_getline(char *s, const i32 lim)
         return 0;
 
     /*for safe: i < lim -1*/
-    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i)
-    {
-        if(c == ' ' || c == '\t')
-        {
+    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i) {
+        if(c == ' ' || c == '\t') {
             i--;
             continue;
         }
         s[i] = c;
     }
-    if (c == '\n')
-    {
+    if (c == '\n') {
         s[i] = c;
         ++i;
     }
@@ -411,8 +387,7 @@ static i32 excerise_1_18()
     char line[MAX_LINE] = {0,};
     char longest[MAX_LINE] = {0,};
 
-    while ((len = excerise_1_18_getline(line, MAX_LINE)) > 0)
-    {
+    while ((len = excerise_1_18_getline(line, MAX_LINE)) > 0) {
         if(len != 0)
             printf("%s\r\n", line);
         len = 0;
@@ -430,8 +405,7 @@ static int excerise_1_19_getline(char *s, const i32 lim)
     /*for safe: i < lim -1*/
     for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i)
         s[i] = c;
-    if (c == '\n')
-    {
+    if (c == '\n') {
         s[i] = c;
         ++i;
     }
@@ -449,8 +423,7 @@ static i32 excerise_1_19()
     char line[MAX_LINE] = {0,};
     char longest[MAX_LINE] = {0,};
 
-    while ((len = excerise_1_18_getline(line, MAX_LINE)) > 0)
-    {
+    while ((len = excerise_1_18_getline(line, MAX_LINE)) > 0) {
         /*just print reverse*/
         while(len--)
             putchar(line[len]);
@@ -467,10 +440,8 @@ static int excerise_1_20_getline(char *s, const i32 lim, const char detab, const
         return 0;
 
     /*for safe: i < lim -1*/
-    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i)
-    {
-        if(c == detab)
-        {
+    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i) {
+        if(c == detab) {
             while(num--)
                 s[i++] = replace;
             continue;
@@ -479,8 +450,7 @@ static int excerise_1_20_getline(char *s, const i32 lim, const char detab, const
         printf("c = %c, i = %d \r\n", c, i);
         s[i] = c;
     }
-    if (c == '\n')
-    {
+    if (c == '\n') {
         s[i] = c;
         ++i;
     }
@@ -519,15 +489,13 @@ static int excerise_1_21_getline(char *s, const i32 lim, const char entab, const
         return 0;
 
     /*for safe: i < lim -1*/
-    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i)
-    {
+    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i) {
         if (c ==  replace)
             blank_count += 1;/*blank count*/
         else
             blank_count = 0;/*reset the blank count*/
 
-        if(blank_count == 4)
-        {
+        if(blank_count == 4) {
             DEBUG("blank_count = %d\r\n", blank_count);
             i -= 3;
             s[i] = entab;
@@ -536,8 +504,7 @@ static int excerise_1_21_getline(char *s, const i32 lim, const char entab, const
         s[i] = c;
     }
 
-    if (c == '\n')
-    {
+    if (c == '\n') {
         s[i] = c;
         ++i;
     }
@@ -577,13 +544,11 @@ static int excerise_1_22_getline(char *s, const i32 lim,  u32 fold)
         return 0;
 
     /*for safe: i < lim -1*/
-    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i)
-    {
+    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i) {
         s[i] = c;
     }
 
-    if (c == '\n')
-    {
+    if (c == '\n') {
         s[i] = c;
         ++i;
     }
@@ -613,6 +578,71 @@ static i32 excerise_1_22()
     return 0;
 }
 
+static int excerise_1_23_getline(char *s, const i32 lim)
+{
+    i32 c = 0, i = 0;
+    i32 pre_buffer = 0, blank_count = 0;
+
+    PDEBUG();
+    if (NULL == s)
+        return 0;
+
+    /*for safe: i < lim -1*/
+    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i) {
+        s[i] = c;
+    }
+
+    if (c == '\n') {
+        s[i] = c;
+        ++i;
+    }
+
+    s[i] = '\0';/*the null character, whose value is zero*/
+    printf("#input: %s\r\n", s);
+    return i;
+}
+
+static i32 excerise_1_23()
+{
+    i32 ret = 0;
+    i32 len = 0, index = 0;
+
+#define MAX_LINE 1000
+#define NUM_OF_BLANK 4
+    char line[MAX_LINE] = {0,};
+    char in_comment = 0, out_comment = 0, in_quote = 0;
+
+    PDEBUG();
+    while ((len = excerise_1_23_getline(line, MAX_LINE)) > 0) {
+        index = 0;
+        while(index < len) {
+            if( line[index] == '"')
+                in_quote = 1;
+
+            if( !in_quote ) {
+                if( line[index] == '/' && line[index+1] == '*') {
+                    index = index+2;
+                    in_comment = 1;
+                }
+                if( line[index] == '*' && line[index+1] == '/') {
+                    index = index+2;
+                    in_comment = 0;
+                }
+                if(in_comment == 1) {
+                    index++;
+                } else {
+                    printf ("%c", line[index]);
+                    index++;
+                }
+            } else {
+                printf ("%c", line[index]);
+                index++;
+            }
+        }
+    }
+    return 0;
+}
+
 i32 main()
 {
     PDEBUG();
@@ -638,9 +668,11 @@ i32 main()
     excerise_1_18();
     excerise_1_19();
     excerise_1_20();
+    excerise_1_21();
+    excerise_1_22();
 #endif
 
-    excerise_1_21();
+    excerise_1_23();
     return 0;
 }
 

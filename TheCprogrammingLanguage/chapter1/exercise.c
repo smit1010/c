@@ -643,6 +643,73 @@ static i32 excerise_1_23()
     return 0;
 }
 
+static int excerise_1_24_getline(char *s, const i32 lim)
+{
+    i32 c = 0, i = 0;
+    i32 pre_buffer = 0, blank_count = 0;
+
+    PDEBUG();
+    if (NULL == s)
+        return 0;
+
+    /*for safe: i < lim -1*/
+    for (i = 0; i < lim -1 && (c = getchar()) != EOF && c != '\n'; ++i) {
+        s[i] = c;
+    }
+
+    if (c == '\n') {
+        s[i] = c;
+        ++i;
+    }
+
+    s[i] = '\0';/*the null character, whose value is zero*/
+    printf("#input: %s\r\n", s);
+    return i;
+}
+
+static i32 excerise_1_24()
+{
+    i32 ret = 0;
+    i32 len = 0, index = 0;
+    i32 t = 0;
+
+#define ARRAY_SIZE(arr) (sizeof(arr)/sizeof(arr[0]))
+#define MAX_LINE 1000
+    char line[MAX_LINE] = {0,};
+    struct error_check {
+        char symbol ;
+        u32 val;
+    };
+    struct error_check err_chk[] = {
+        {'[',0},
+        {']',0},
+        {'{',0},
+        {'}',0},
+        {'(',0},
+        {')',0},
+
+    };
+    /*chech error match*/
+    while ((len = excerise_1_24_getline(line, MAX_LINE)) > 0) {
+        for (t = 0; t < len -1; t++) {
+            for(index = 0; index < ARRAY_SIZE(err_chk); index++) {
+                if(line[t] == err_chk[index].symbol)
+                    err_chk[index].val += 1;
+            }
+        }
+
+        for(index = 0; index < ARRAY_SIZE(err_chk); index += 2) {
+            if(err_chk[index].val != err_chk[index+1].val) {
+                printf("###ERR: dismatch %c\r\n", 
+                        err_chk[index].val > err_chk[index +1].val ? err_chk[index+1].symbol:err_chk[index].symbol);
+                err_chk[index].val = err_chk[index+1].val = 0;
+            }
+        }
+    }
+
+
+}
+
 i32 main()
 {
     PDEBUG();
@@ -670,9 +737,10 @@ i32 main()
     excerise_1_20();
     excerise_1_21();
     excerise_1_22();
+    excerise_1_23();
 #endif
 
-    excerise_1_23();
+    excerise_1_24();
     return 0;
 }
 

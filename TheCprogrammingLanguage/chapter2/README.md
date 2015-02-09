@@ -1,1 +1,1 @@
-#chapter2 TYPES, Operations and Expression
+#chapter2 TYPES, Operaors and Expressions

@@ -6,7 +6,7 @@
  ************************************************************************/
 
 #include<stdio.h>
-#include "malloc.h"
+#include <stdlib.h>
 #include "../../cbb/includes.h"
 
 static int chapter_strlen(char *s)
@@ -47,14 +47,45 @@ static int chapter_strcat(char *s, const char *d)
     while((s[i++] = d[j++]) != '\0');
 }
 
+static u32 next_rand = 1;
+
+static void chapter_set_seed_for_rand(u32 seed)
+{
+    next_rand = seed;
+}
+static int chapter_rand(void)
+{
+    u32 next_rand = next_rand * 1103515245  + 12345;
+    return (unsigned int )(next_rand >> 16) % 32768;
+}
+
+static void chapter_disp_rand()
+{
+    u32 ret = 0;
+    chapter_set_seed_for_rand(156);
+    while(1) {
+         ret = chapter_rand();
+         VAR_DEBUG(ret);
+    }
+}
+
+static u32 get_bits(u32 x, int start_bit, int bit_num)
+{
+    return (x >> (start_bit + 1 -bit_num))&(~(~0<<bit_num));
+}
 int main()
 {
     int ret = 0;
     int sizeof_len = 0;
     char str[] = "chapter_strlen";
     char str_atoi[] = "1234";
-    char str_src[] = "first";/*the array waste of memory*/
+    char str_src[100] = "first";/*the array waste of memory*/
     char str_des[] = "second";
+    u32 get_bit = 0x17;
+#define OCT_DIG '\123'
+    printf("OCT_DIG = %d\r\n", OCT_DIG);
+#define HEX_DIG '\xAB'
+    printf("HEX_DIG = 0x%x\r\n", HEX_DIG);
 
     PDEBUG();
 
@@ -67,12 +98,11 @@ int main()
     ret = chapter_atoi(str_atoi);
     VAR_DEBUG(ret);
 
-    str_src = realloc(sizeof(str_des));
-    if (NULL == str_src) {
-        CBB_ERR(str_src);
-        return -1;
-    }
 
     ret = chapter_strcat(str_src, str_des);
     DEBUG("%s \r\n", str_src);
+
+    ret = get_bits(get_bit, 3, 2);
+    VAR_DEBUG(ret);
+
 }

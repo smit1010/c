@@ -48,4 +48,24 @@ void sensor_destory(Sensor *const me) {
     sensor_cleanup(me);
     free(me);
 }
+
+int sensor_acquireVale(Sensor *me)
+{
+    int *r = NULL, *w = NULL;
+    int j;
+
+    switch (me->whatKindOfInterface){
+        case MEMORYMAPPED:
+            w = (int*)WRITEADDR;
+            *w = WRITERADDR;
+            for (j = 0; j < 100; j++)
+                r = (int*)READADDR;
+            me->value = *r;
+            break;
+        case PORTMAPPED:
+            me->value  = INP(SENSORPORT);
+            break;
+    };
+    return me->value;
+}
  

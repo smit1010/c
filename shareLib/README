@@ -1,0 +1,2 @@
+1.if you want to use share library, u must add ../lib to LD_LIBRARY_PATH env
+

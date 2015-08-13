@@ -1,17 +1,13 @@
 /*************************************************************************
-	> File Name: callShareLib.c
+	> File Name: staticLib.c
 	> Author: xopenlee
 	> Mail: 750haige@gmail.com
-	> Created Time: Friday, August 07, 2015 PM08:38:20 HKT
+	> Created Time: Friday, August 07, 2015 PM10:47:01 HKT
  ************************************************************************/
 
 #include<stdio.h>
-#include <shareLib.h"
-
-int main()
+int staticFunc(void)
 {
-    printf("###INFO: mainFunc\r\n");
-    RshareFunc();
+    printf("###INFO: staticFunc\r\n");
     return 0;
 }
-

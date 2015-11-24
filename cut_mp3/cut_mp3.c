@@ -48,7 +48,7 @@ static int get_cut_part(const int file_size)
     return part;
 }
 
-static int get_file_duration(char *file_name)
+static int get_file_duration(const char *file_name)
 {
     int ret = 0,i_duration = 0;
     char cmd[ARR_LEN] = {0}, str_duration[ARR_LEN] = {0};
@@ -69,7 +69,7 @@ static int get_file_duration(char *file_name)
     return  i_duration; 
 }
 
-static int get_file_size(char *file_name)
+static int get_file_size(const char *file_name)
 {
     int ret = 0, i_size = 0;
     char cmd[ARR_LEN] = {0}, str_size[ARR_LEN] = {0};
@@ -103,7 +103,7 @@ int main(int argc, char **argv)
 
     if(argc != 2) {
         printf("###INFO: Please Chech Input Parm Again.\r\n");
-        printf("example: ./prog sample.mp3");
+        printf("example: ./prog sample.mp3\r\n");
         return -1;
     }
 
@@ -116,7 +116,7 @@ int main(int argc, char **argv)
 
     part = get_cut_part(i_size);
     if (part < 0) {
-        printf("###ERR: Get cut Part Err.\r\n");
+        printf("###ERR: Get Cut Part Err.\r\n");
         return -3;
     }
 

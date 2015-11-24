@@ -18,7 +18,7 @@ int second(void)
     while(1) {
         SECOND_MUTEX_LOCK();
         printf("###INFO: %s\r\n", __FILE__);
-        usleep(1000);
+        usleep(30000);
         SECOND_MUTEX_ULOCK();
     }
 
